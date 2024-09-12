@@ -7,8 +7,6 @@ This repository contains a bash script that facilitates the parallel simulation 
 - [Requirements](#requirements)
 - [Usage](#usage)
 - [Script Parameters](#script-parameters)
-- [Example](#example)
-- [License](#license)
 
 ## Overview
 The bash script (`run_jobs.sh`) is designed to process multiple `.raw` files concurrently by distributing the load across available CPU cores. Each `.raw` file is processed in a temporary directory, and the results are stored in a shared destination folder. The Python script that performs the file processing runs within each of these directories, ensuring isolation and preventing file conflicts.
@@ -53,11 +51,10 @@ The bash script (`run_jobs.sh`) is designed to process multiple `.raw` files con
   - `--destination_folder`: Path to the folder for saving results.
   - `--num_processors`: Number of processors (default: 16).
   - `--x_dim`, `--y_dim`, `--z_dim`: Dimensions of the image (default: 1000x1000x6).
-  - `--cropping`: Whether to apply cropping during processing.
 
-## Example
 
-Assume you have a folder `raw_missed_files_Crop10` containing `.raw` files and a folder `2D_micromodal` with the Python script `run_scripts.py`. The following shows how the script processes each `.raw` file:
+## Cropping Parameters
+  In the python script you can specify the cropping paramters of the image, for instance:
+  
+  `x_min,x_max,y_min,y_max= (488,1000,2,514)`
 
-```bash
-./run_jobs.sh
