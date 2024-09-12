@@ -1,6 +1,6 @@
 # Parallel Processing of RAW Files with Python
 
-This repository contains a bash script that facilitates the parallel processing of `.raw` files using a Python script. The script dynamically creates job-specific directories, copies necessary files, and runs multiple instances of the Python script in parallel using available CPU cores.
+This repository contains a bash script that facilitates the parallel simulation of CO2 given `.raw` files of physical domains using a Python script. The script dynamically creates job-specific directories, copies necessary files, and runs multiple instances of the Python script in parallel using available CPU cores.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -18,9 +18,12 @@ The bash script (`run_jobs.sh`) is designed to process multiple `.raw` files con
 - **Bash** (Tested on Linux systems.)
 - **OpenFOAM** (for sourcing necessary configurations in the script)
 - Ensure the following software and libraries are installed:
-  - Python 3.x
+  - Python 3.11.9 (although it can work on earlier versions)
   - OpenFOAM
   - GeoChemFoam
+  - numpy-stl
+  - skimage
+  - matplotlib
 
 ## Usage
 
@@ -35,7 +38,7 @@ The bash script (`run_jobs.sh`) is designed to process multiple `.raw` files con
       - `input_directory`: Path to the directory containing the `.raw` input files.
       - `original_dir`: Path to the original directory containing the `script.py` file and other necessary resources.
       - `destination_folder`: Path where all output results will be stored.
-      - `total_cores`: Total number of cores available on your machine (or use `$(nproc)` to fetch the core count dynamically).
+      - `total_cores`: Total number of cores available on your machine (or use `$(nproc)` to fetch the core count dynamically). (Practically it should be less than the available cores)
       
 3. **Run the Script:**
     Run the bash script to start processing the `.raw` files in parallel:
@@ -43,17 +46,9 @@ The bash script (`run_jobs.sh`) is designed to process multiple `.raw` files con
     ./run_jobs.sh
     ```
 
-## Script Parameters
+## Python Script Parameters
 
-The bash script accepts no direct input arguments but is configured with the following internal parameters:
-
-- **input_directory**: Directory containing `.raw` files to be processed.
-- **original_dir**: Directory containing `run_scripts.py` and required files.
-- **destination_folder**: Destination folder where output results will be saved.
-- **cores_per_job**: Number of CPU cores allocated per Python job.
-- **total_cores**: Total CPU cores available for processing.
-- **max_concurrent_jobs**: Maximum number of jobs to run concurrently, calculated by dividing `total_cores` by `cores_per_job`.
-- **Python script parameters**: These parameters are passed to `run_scripts.py`:
+ These parameters are passed to `run_scripts.py`:
   - `--raw_file_path`: Path to the input `.raw` file.
   - `--destination_folder`: Path to the folder for saving results.
   - `--num_processors`: Number of processors (default: 16).
