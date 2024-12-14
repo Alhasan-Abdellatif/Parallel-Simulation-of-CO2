@@ -12,9 +12,9 @@ This repository contains a bash script that facilitates the parallel simulation 
 The bash script (`run_jobs.sh`) is designed to process multiple `.raw` files concurrently by distributing the load across available CPU cores. Each `.raw` file is processed in a temporary directory, and the results are stored in a shared destination folder. The Python script that performs the file processing runs within each of these directories, ensuring isolation and preventing file conflicts.
 
 ## Requirements
-- **Python** (Ensure the Python environment supports running the `run_scripts.py` file.)
-- **Bash** (Tested on Linux systems.)
-- **OpenFOAM** (for sourcing necessary configurations in the script)
+- **Python** 
+- **Bash** 
+- **OpenFOAM**
 - Ensure the following software and libraries are installed:
   - Python 3.11.9 (although it can work on earlier versions)
   - OpenFOAM
